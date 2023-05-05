@@ -1,0 +1,52 @@
+:root {
+  --brand: #41b883;
+  --bg: #1e1e20;
+  --bg-secondary: #27272a;
+  --accent-color: #71717a;
+  --accent-color-2: #52525b;
+
+  --z-1: 10;
+  --z-2: 20;
+  --z-3: 30;
+  --z-4: 40;
+  --z-5: 50;
+  --z-6: 60;
+  --z-7: 70;
+  --z-8: 80;
+}
+
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 16px;
+  min-height: 100vh;
+  color: white;
+  background: var(--bg);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
