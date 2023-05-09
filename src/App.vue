@@ -16,7 +16,10 @@ import AppLogo from './components/AppLogo.vue'
           <RouterLink class="link" to="/">Home</RouterLink>
         </li>
         <li>
-          <RouterLink to="/about">About</RouterLink>
+          <RouterLink class="link" to="/bookshelf">Bookshelf</RouterLink>
+        </li>
+        <li>
+          <RouterLink class="link" to="/about">about</RouterLink>
         </li>
       </ul>
     </nav>

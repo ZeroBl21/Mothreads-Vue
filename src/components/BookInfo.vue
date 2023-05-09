@@ -17,12 +17,6 @@ const show = ref(false)
 
 const output = computed(() => DOMpurify.sanitize(marked(p.description)))
 </script>
-<!--   const [isDescriptionHidden, setDescriptionHidden] = useState(true) -->
-<!---->
-<!--   function toggleDescription() { -->
-<!--     setDescriptionHidden((prev) => !prev) -->
-<!--   } -->
-<!---->
 
 <template>
   <section class="details__section">
@@ -31,9 +25,9 @@ const output = computed(() => DOMpurify.sanitize(marked(p.description)))
         <h2 class="details__info-title">Categories</h2>
         <p class="details__tags-list">
           <span
-            class="details__tag"
             v-for="category of categories"
             :key="category"
+            class="details__tag"
             >{{ category }}</span
           >
         </p>
@@ -46,7 +40,7 @@ const output = computed(() => DOMpurify.sanitize(marked(p.description)))
           :class="{ show: show }"
           v-html="output"
         />
-        <button class="details__btn left" @click="show = !show">
+        <button class="btn left" @click="show = !show">
           <Icon
             v-if="show"
             icon="tabler:chevron-up"
@@ -92,16 +86,9 @@ const output = computed(() => DOMpurify.sanitize(marked(p.description)))
 </template>
 
 <style>
-.left {
-  margin-left: auto;
-  margin-top: 0.5rem
-}
-
 .details__section {
   display: grid;
   min-height: 500px;
-  grid-template-columns: 2fr 1fr;
-  /* grid min-h-[500px] gap-4 sm:grid-cols-3 */
 }
 
 .details__tags-list {
@@ -118,6 +105,7 @@ const output = computed(() => DOMpurify.sanitize(marked(p.description)))
   border-right-color: var(--accent-color-2);
   border-bottom-color: var(--accent-color-2);
   transition: all 100ms ease-in;
+  cursor: pointer;
 }
 
 .details__tag:hover {
@@ -126,7 +114,7 @@ const output = computed(() => DOMpurify.sanitize(marked(p.description)))
 }
 
 .details__containers {
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .details__description {
@@ -151,6 +139,11 @@ const output = computed(() => DOMpurify.sanitize(marked(p.description)))
   font-weight: 600;
   font-size: 1.25rem;
   padding-block: 2rem;
-  /* py-4 text-lg font-bold */
+}
+
+@media (min-width: 640px) {
+  .details__section {
+    grid-template-columns: 2fr 1fr;
+  }
 }
 </style>

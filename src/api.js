@@ -17,7 +17,7 @@ export const loadingBook = {
   loadingBook: true
 }
 
-const loadingBooks = Array.from({ length: 10 }, (v, index) => ({
+export const loadingBooks = Array.from({ length: 10 }, (_v, index) => ({
   id: `loading-book-${index}`,
   ...loadingBook
 }))
@@ -26,7 +26,7 @@ const searchUrl = 'https://www.googleapis.com/books/v1/volumes?q='
 const baseUrl = 'https://www.googleapis.com/books/v1/volumes'
 
 function formatCategories(categories) {
-  if (!categories) return 'Unknown'
+  if (!categories) return ['Unknown']
 
   return [...new Set(categories.flatMap((i) => i.split(' / ')))]
 }

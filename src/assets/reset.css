@@ -3,6 +3,7 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
   position: relative;
   font-weight: normal;
 }
@@ -26,6 +27,11 @@ textarea {
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
   margin: 0; /* 2 */
+}
+
+button {
+  background-color: transparent;
+  border: 0;
 }
 
 ol,

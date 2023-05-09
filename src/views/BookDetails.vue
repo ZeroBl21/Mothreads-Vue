@@ -3,8 +3,9 @@ import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { Icon } from '@iconify/vue'
 
-import BookInfo from '../components/BookInfo.vue'
-import api, { loadingBook } from '../api'
+import StatusButtons from '@/components/StatusButtons.vue'
+import BookInfo from '@/components/BookInfo.vue'
+import api, { loadingBook } from '@/api'
 
 const route = useRoute()
 
@@ -29,7 +30,7 @@ watchEffect(async () => {
     <div class="details__body">
       <div class="details__actions">
         <button
-          class="details__btn"
+          class="btn"
           title="Copy link to clipboard"
           @click="() => {}"
         >
@@ -41,9 +42,8 @@ watchEffect(async () => {
           />
         </button>
 
-        <!--
-        <StatusButtons book="{book}" />
-      --></div>
+        <StatusButtons :book="book" />
+      </div>
       <BookInfo
         :publisher="book?.publisher"
         :published-date="book?.publishedDate"
@@ -58,12 +58,11 @@ watchEffect(async () => {
 
 <style>
 .container {
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .details__header {
   display: grid;
-  grid-template-columns: 1fr 2fr;
 }
 
 .details__cover {
@@ -74,9 +73,8 @@ watchEffect(async () => {
 .details__img {
   z-index: var(--z-2);
   aspect-ratio: 9 / 16;
-  max-width: 14rem;
-  min-width: 14rem;
-  max-height: 25rem;
+  width: 11rem;
+  height: 17rem;
   box-shadow: 0px 0px 3px 1px rgba(255, 255, 255, 0.5);
 }
 
@@ -88,9 +86,9 @@ watchEffect(async () => {
 .details__info {
   display: grid;
   align-content: center;
-  gap: 1rem;
-
-  /* col-span-2 grid content-center gap-4 text-center sm:gap-8 sm:text-left */
+  justify-items: center;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .details__authors {
@@ -99,16 +97,12 @@ watchEffect(async () => {
 }
 
 .details__body {
-  position: relative;
-  bottom: 6rem;
-
   border-radius: 0.25rem;
   background: var(--bg-secondary);
-  padding: 2rem;
+  padding: 1rem;
   border: 1px solid var(--accent-color);
   border-right-color: var(--accent-color-2);
   border-bottom-color: var(--accent-color-2);
-  /* rounded bg-gray-800 p-8 outline outline-1 outline-slate-600 */
 }
 
 .details__actions {
@@ -116,26 +110,30 @@ watchEffect(async () => {
   align-items: center;
   justify-content: flex-end;
   gap: 2rem;
+  padding: 1rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--accent-color-2);
-  /* flex items-center justify-end gap-8 border-b border-slate-700 pb-4 */
 }
 
-.details__btn {
-  display: grid;
-  place-items: center;
-  background: transparent;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 100%;
-  border: 1px solid var(--accent-color-2);
-  transition: all 100ms ease-in;
-  /* grid h-10 w-10 place-items-center rounded-full bg-slate-700 text-lg text-white transition ease-in hover:scale-110 hover:brightness-125 */
-}
+@media (min-width: 640px) {
+  .details__header {
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+  }
 
-.details__btn:hover {
-  scale: 1.1;
-  filter: brightness(1.25);
-  border-color: var(--brand);
+  .details__body {
+    position: relative;
+    bottom: 6rem;
+  }
+
+  .details__img {
+    width: 13rem;
+    height: 20rem;
+  }
+
+  .details__info {
+    text-align: left;
+    justify-items: normal;
+  }
 }
 </style>

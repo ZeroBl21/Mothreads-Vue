@@ -55,13 +55,9 @@ defineProps({
   border: 1px solid var(--accent-color);
   border-right-color: var(--accent-color-2);
   border-bottom-color: var(--accent-color-2);
-}
 
-@media (min-width: 640px) {
-  .bookcard {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-  }
+  container-name: bookcard;
+  container-size: size;
 }
 
 .bookcard__figure {
@@ -89,33 +85,15 @@ defineProps({
   gap: 1rem;
 }
 
-@media (min-width: 640px) {
-  .bookcard__header {
-    flex-direction: row;
-  }
-}
-
 .bookcard__title {
   text-align: center;
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
 
-@media (min-width: 640px) {
-  .bookcard__title {
-    text-align: left;
-  }
-}
-
 .bookcard__details {
   display: grid;
   text-align: center;
-}
-
-@media (min-width: 640px) {
-  .bookcard__details {
-    text-align: right;
-  }
 }
 
 .bookcard__publisher {
@@ -125,23 +103,33 @@ defineProps({
 }
 
 .bookcard__description {
-  display: hidden;
+  display: none;
   margin-top: 1rem;
   opacity: 0.8;
 }
 
-@media (min-width: 640px) {
+@container bookcard (min-width: 640px) {
   .bookcard__description {
     display: block;
   }
+
+  .bookcard {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    background-color: red;
+  }
+
+  .bookcard__header {
+    flex-direction: row;
+  }
+
+  .bookcard__title {
+    text-align: left;
+  }
+
+  .bookcard__details {
+    text-align: right;
+  }
 }
-/**/
-/* .bookcard__actions { */
-/*   display: flex; */
-/*   align-items: center; */
-/*   justify-content: flex-end; */
-/*   position: absolute; */
-/*   inset: 0; */
-/*   right: -1remm; */
-/* } */
+
 </style>
