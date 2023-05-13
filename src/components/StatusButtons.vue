@@ -1,5 +1,5 @@
 <script setup>
-import { computed, watchEffect } from 'vue'
+import { computed } from 'vue'
 import { Icon } from '@iconify/vue'
 
 import useLocalBooks from '@/composables/useLocalBooks.js'
@@ -38,43 +38,18 @@ function toggleFavorite(id) {
     }
     return i
   })
-  console.log(localBooks.value)
 }
 </script>
 
 <template>
   <template v-if="matchingBook">
-    <button
-      class="btn"
-      :title="`${matchingBook.isFavorite ? 'Remove' : 'Add'} to favorites`"
-      @click="toggleFavorite(book.id)"
-    >
-      <Icon
-        v-if="matchingBook.isFavorite"
-        icon="material-symbols:bookmark"
-        height="20"
-        width="20"
-        color="#ffffff"
-      />
-      <Icon
-        v-else
-        icon="material-symbols:bookmark-outline-rounded"
-        height="20"
-        width="20"
-        color="#ffffff"
-      />
+    <button class="btn" :title="`${matchingBook.isFavorite ? 'Remove' : 'Add'} to favorites`"
+      @click="toggleFavorite(book.id)">
+      <Icon v-if="matchingBook.isFavorite" icon="material-symbols:bookmark" height="20" width="20" color="#ffffff" />
+      <Icon v-else icon="material-symbols:bookmark-outline-rounded" height="20" width="20" color="#ffffff" />
     </button>
-    <button
-      class="btn danger"
-      title="Remove from Bookshelf"
-      @click="deleteFromLocalBooks(book.id)"
-    >
-      <Icon
-        icon="material-symbols:delete-forever-outline-rounded"
-        height="20"
-        width="20"
-        color="#ffffff"
-      />
+    <button class="btn danger" title="Remove from Bookshelf" @click="deleteFromLocalBooks(book.id)">
+      <Icon icon="material-symbols:delete-forever-outline-rounded" height="20" width="20" color="#ffffff" />
     </button>
   </template>
   <button v-else class="btn" title="Add to Bookshelf" @click="addToLocalBooks">

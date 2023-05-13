@@ -1,15 +1,22 @@
 <script setup>
+import { computed, ref } from 'vue'
 import { Icon } from '@iconify/vue'
 
 import BookList from '@/components/BookList.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import useLocalBooks from '@/composables/useLocalBooks.js'
-import { ref } from 'vue'
 
-const test = ref(false)
+const filters = {
+  all: (books) => books,
+  favorites: (books) => books.filter((book) => book.isFavorite),
+}
 
-console.log(test.value)
 const localBooks = useLocalBooks()
+const visibility = ref('all')
+const list = ref(false)
+
+const filteredBooks = computed(() => filters[visibility.value](localBooks.value))
+
 </script>
 
 <template>
@@ -18,19 +25,27 @@ const localBooks = useLocalBooks()
     <SearchInput />
     <menu>
       <ul class="library__filters">
-        <li class="filter__item active">All</li>
-        <li class="filter__item">Favorites</li>
-        <li class="filter__item icon left active">
-          <Icon icon="ic:baseline-format-list-bulleted" height="20" width="20" color="white" />
+        <li class="filter__item" :class="{ 'active': visibility === 'all' }">
+          <button class="icon" @click="visibility = 'all'">
+            All
+          </button>
         </li>
-        <li class="filter__item icon">
-          <button @click="test = !test">
+        <li class="filter__item" :class="{ 'active': visibility === 'favorites' }">
+          <button class="icon" @click="visibility = 'favorites'">Favorites</button>
+        </li>
+        <li class="filter__item left" :class="{ 'active': !list }">
+          <button class="icon" @click="list = false">
+            <Icon icon="ic:baseline-format-list-bulleted" height="20" width="20" color="white" />
+          </button>
+        </li>
+        <li class="filter__item" :class="{ 'active': list }">
+          <button class="icon" @click="list = true">
             <Icon icon="ph:squares-four" height="20" width="20" color="white" />
           </button>
         </li>
       </ul>
     </menu>
-    <BookList v-if="localBooks.length > 0" :books="localBooks" :class="{ 'square': test }" />
+    <BookList v-if="filteredBooks.length > 0" :books="filteredBooks" :square="list" />
     <p v-else>You don&apos;t have any books in your library.</p>
   </div>
 </template>
@@ -60,7 +75,6 @@ const localBooks = useLocalBooks()
 .filter__item {
   display: flex;
   outline: 1px solid var(--accent-color);
-  padding-inline: 1rem;
   border-radius: 0.25rem;
 }
 

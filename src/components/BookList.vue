@@ -4,12 +4,13 @@ import { loadingBooks } from '@/api.js'
 
 defineProps({
   books: Array,
-  loading: Boolean
+  loading: Boolean,
+  square: Boolean,
 })
 </script>
 
 <template>
-  <section class="books">
+  <section class="books" :class="{ square: square }">
     <BookCard v-for="book of books" :key="book.id" :book="book" />
     <template v-if="loading">
       <BookCard v-for="book of loadingBooks" :key="book.id" :book="book" />

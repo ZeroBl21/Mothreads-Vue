@@ -1,4 +1,4 @@
-*,
+*,.css
 *::before,
 *::after {
   box-sizing: border-box;
@@ -30,6 +30,7 @@ textarea {
 }
 
 button {
+  color: inherit;
   background-color: transparent;
   border: 0;
 }

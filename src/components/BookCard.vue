@@ -7,57 +7,64 @@ defineProps({
 </script>
 
 <template>
-  <article class="bookcard">
-    <figure class="bookcard__figure">
-      <img class="bookcard__img" :src="book.thumbnail" :alt="book.title" />
-    </figure>
+  <article class="bookcard__container">
+    <div class="bookcard">
+      <figure class="bookcard__figure">
+        <img class="bookcard__img" :src="book.thumbnail" :alt="book.title" />
+      </figure>
 
-    <div class="bookcard__body">
-      <div class="bookcard__header">
-        <h2 class="bookcard__title font-medium">
-          <RouterLink class="link" :to="`/bookshelf/${book.id}`">
-            {{ book.title }}
-          </RouterLink>
-        </h2>
-        <div class="bookcard__details">
-          <span class="font-medium">
-            {{ book.authors ? book.authors.join(', ') : 'Desconocido' }}
-          </span>
-          <span class="bookcard__publisher">
-            ({{ book.publisher || 'Desconocido' }})
-          </span>
+      <div class="bookcard__body">
+        <div class="bookcard__header">
+          <h2 class="bookcard__title font-medium">
+            <RouterLink class="link" :to="`/bookshelf/${book.id}`">
+              {{ book.title }}
+            </RouterLink>
+          </h2>
+          <div class="bookcard__details">
+            <span class="font-medium">
+              {{ book.authors ? book.authors.join(', ') : 'Desconocido' }}
+            </span>
+            <span class="bookcard__publisher">
+              ({{ book.publisher || 'Desconocido' }})
+            </span>
+          </div>
         </div>
-      </div>
 
-      <p class="bookcard__description">
-        {{
-          book.description ? book.description.slice(0, 500) : 'Sin Descripción'
-        }}
-      </p>
+        <p class="bookcard__description">
+          {{
+            book.description ? book.description.slice(0, 500) : 'Sin Descripción'
+          }}
+        </p>
 
-      <div class="bookcard__actions">
-        <div class="flex flex-col items-center gap-8"></div>
+        <div class="bookcard__actions">
+          <div class="flex flex-col items-center gap-8"></div>
+        </div>
       </div>
     </div>
   </article>
 </template>
 
 <style>
-.font-medium {
-  font-weight: 600;
-}
-
-.bookcard {
-  position: relative;
-  border-radius: 0.25rem;
-  padding: 2rem 3rem;
+.bookcard__container {
   background: var(--bg-secondary);
   border: 1px solid var(--accent-color);
   border-right-color: var(--accent-color-2);
   border-bottom-color: var(--accent-color-2);
 
   container-name: bookcard;
-  container-size: size;
+  container-type: inline-size;
+}
+
+.font-medium {
+  font-weight: 600;
+}
+
+.bookcard {
+  display: grid;
+  height: 100%;
+  position: relative;
+  border-radius: 0.25rem;
+  padding: 2rem 3rem;
 }
 
 .bookcard__figure {
@@ -114,9 +121,7 @@ defineProps({
   }
 
   .bookcard {
-    display: grid;
     grid-template-columns: 1fr 3fr;
-    background-color: red;
   }
 
   .bookcard__header {
@@ -131,5 +136,4 @@ defineProps({
     text-align: right;
   }
 }
-
 </style>
