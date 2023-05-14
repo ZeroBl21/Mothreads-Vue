@@ -10,8 +10,8 @@ function useInfinityScroll(scrollComponent, callback) {
   })
 
   function handleScroll() {
-    let element = scrollComponent.value
-    console.log(element)
+    let element = scrollComponent.value.$el
+
     if (element.getBoundingClientRect().bottom < window.innerHeight) {
       callback()
     }
