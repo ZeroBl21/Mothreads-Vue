@@ -4,7 +4,7 @@ export const loadingBook = {
   title: 'Loading...',
   authors: ['loading...'],
   thumbnail: bookPlaceholderSvg,
-  publisher: 'Loading Publishing',
+  publisher: 'Loading Publisher',
   publishedDate: 'Loading...',
   description: 'Loading...',
   categories: ['Loading...'],
