@@ -30,11 +30,7 @@ defineProps({
           </div>
         </div>
 
-        <p class="bookcard__description">
-          {{
-            book.description ? book.description.slice(0, 500) : 'Sin Descripción'
-          }}
-        </p>
+        <p class="bookcard__description" v-html="book.description ? book.description.slice(0, 500) : ''"/>
 
         <div class="bookcard__actions">
           <div class="flex flex-col items-center gap-8"></div>
