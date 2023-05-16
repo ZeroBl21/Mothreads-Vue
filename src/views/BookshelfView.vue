@@ -1,28 +1,44 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { Icon } from '@iconify/vue'
 
 import BookList from '@/components/BookList.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import useLocalBooks from '@/composables/useLocalBooks.js'
+import { useRoute, useRouter } from 'vue-router'
 
 const filters = {
-  all: (books) => books,
-  favorites: (books) => books.filter((book) => book.isFavorite),
+  all: (books) => books.filter(book => book.title.toLowerCase().includes(q.value)),
+  favorites: (books) => books.filter((book) => book.isFavorite && book.title.toLowerCase().includes(q.value)),
 }
 
 const localBooks = useLocalBooks()
 const visibility = ref('all')
 const list = ref(false)
 
+const q = ref('')
+const route = useRoute()
+const router = useRouter()
+
 const filteredBooks = computed(() => filters[visibility.value](localBooks.value))
+
+watchEffect(() => {
+  q.value = route.query?.q || ''
+})
+
+function handleSubmit(e) {
+  const { search } = e.target.elements
+  if (!search) return
+
+  router.replace({ query: { q: search.value.trim().toLowerCase() } })
+}
 
 </script>
 
 <template>
   <div class="container">
     <h1 class="library__title">Library</h1>
-    <SearchInput />
+    <SearchInput :handle-submit="handleSubmit" />
     <menu>
       <ul class="library__filters">
         <li class="filter__item" :class="{ 'active': visibility === 'all' }">
